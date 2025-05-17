@@ -8,7 +8,7 @@ using Foody.DataAccessLayer.Context;
 
 namespace Foody.DataAccessLayer.Repsoitories
 {
-    public class GenericRepository<T> : IgenericDal<T> where T : class
+    public class GenericRepository<T> : IGenericDal<T> where T : class
     {
         private readonly FoodyContext _context;
 
