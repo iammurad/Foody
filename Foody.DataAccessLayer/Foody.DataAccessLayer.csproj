@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Concrete\" />
+    <Folder Include="EntityFramework\" />
+    <Folder Include="Repsoitories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foody.EntityLayer\Foody.EntityLayer.csproj" />
+  </ItemGroup>
+
 </Project>
