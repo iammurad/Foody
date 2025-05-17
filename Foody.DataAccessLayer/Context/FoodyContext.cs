@@ -12,7 +12,7 @@ namespace Foody.DataAccessLayer.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-6EJT1VO\\SQLEXPRESS.;Database=FoodyDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-6EJT1VO\\SQLEXPRESS;Database=FoodyDb;Trusted_Connection=True;Encrypt=False;");
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Address> Addresses { get; set; }
