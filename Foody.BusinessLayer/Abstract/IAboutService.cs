@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Foody.EntityLayer.Concrete;
 
-namespace Foody.DataAccessLayer.Abstract
+namespace Foody.BusinessLayer.Abstract
 {
-    public interface IFeatureDal: IGenericDal<Feature>
+    public interface IAboutService : IGenericService<About>
     {
+
     }
+    
 }
