@@ -19,7 +19,7 @@ namespace Foody.BusinessLayer.Concrete
             _categoryDal = categoryDal;
         }
 
-        public void TDelete(Category Id)
+        public void TDelete(int Id)
         {
             _categoryDal.Delete(Id);
         }

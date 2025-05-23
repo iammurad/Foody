@@ -10,7 +10,7 @@ namespace Foody.DataAccessLayer.Abstract
     {
         void Insert(T entity);
         void Update(T entity);
-        void Delete(T Id);
+        void Delete(int Id);
         T GetById(int id);
         List<T> GetAll();
     }

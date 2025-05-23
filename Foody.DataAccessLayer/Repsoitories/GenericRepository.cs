@@ -17,7 +17,7 @@ namespace Foody.DataAccessLayer.Repsoitories
             _context = context;
         }
 
-        public void Delete(T Id)
+        public void Delete(int Id)
         {
             var value = _context.Set<T>().Find(Id);
             _context.Set<T>().Remove(value);

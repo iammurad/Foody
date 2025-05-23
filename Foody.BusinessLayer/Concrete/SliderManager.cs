@@ -18,7 +18,7 @@ namespace Foody.BusinessLayer.Concrete
             _sliderDal = sliderDal;
         }
 
-        public void TDelete(Slider Id)
+        public void TDelete(int Id)
         {
             _sliderDal.Delete(Id);
         }

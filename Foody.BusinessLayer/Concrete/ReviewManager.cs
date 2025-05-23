@@ -18,7 +18,7 @@ namespace Foody.BusinessLayer.Concrete
             _reviewDal = reviewDal;
         }
 
-        public void TDelete(Review Id)
+        public void TDelete(int Id)
         {
             _reviewDal.Delete(Id);
         }
