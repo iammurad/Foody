@@ -14,6 +14,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
+builder.Services.AddScoped<IProductDal, EfProductDal>();
+builder.Services.AddScoped<IProductService, ProductManager>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

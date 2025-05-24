@@ -17,6 +17,11 @@ namespace Foody.BusinessLayer.Concrete
             _productDal = productDal;
         }
 
+        public List<Product> TGetProductsWithCategory()
+        {
+            return _productDal.GetProductsWithCategory();
+        }
+
         public void TDelete(int Id)
         {
             _productDal.Delete(Id);
