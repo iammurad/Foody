@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foody.BusinessLayer", "Food
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foody.PresentationLayer", "Foody.PresentationLayer\Foody.PresentationLayer.csproj", "{B67CBC79-99FD-4958-9332-FFD1F31AC886}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foody.DtoLayer", "Foody.DtoLayer\Foody.DtoLayer.csproj", "{EC4F5D94-CB94-4A37-B427-A3161FA94481}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B67CBC79-99FD-4958-9332-FFD1F31AC886}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B67CBC79-99FD-4958-9332-FFD1F31AC886}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B67CBC79-99FD-4958-9332-FFD1F31AC886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4F5D94-CB94-4A37-B427-A3161FA94481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4F5D94-CB94-4A37-B427-A3161FA94481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4F5D94-CB94-4A37-B427-A3161FA94481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4F5D94-CB94-4A37-B427-A3161FA94481}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
