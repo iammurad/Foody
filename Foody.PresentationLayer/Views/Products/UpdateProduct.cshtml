@@ -1,6 +1,6 @@
 ﻿@model Product
 @{
-    ViewData["Title"] = "CreateProduct";
+    ViewData["Title"] = "UpdateProduct";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
@@ -24,7 +24,7 @@
 					<i class="icon-arrow-right"></i>
 				</li>
 				<li class="nav-item">
-					<a href="#">Create Products</a>
+					<a href="#">Update Product</a>
 				</li>
 			</ul>
 		</div>
@@ -36,6 +36,7 @@
 					</div>
 					<div class="card-body">
 						<form method="post">
+							<input type="hidden" asp-for="ProductId" />
 							<label for="ProductName">Product Name</label>
 							<input type="text" asp-for="ProductName" class="form-control" />
 
@@ -55,7 +56,7 @@
 							<label for="CategoryId">Category</label>
 							<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
 
-							<button type="submit" class="btn btn-primary mt-3">Create Product</button>	
+							<button type="submit" class="btn btn-primary mt-3">Update Product</button>
 						</form>
 					</div>
 				</div>
@@ -64,3 +65,4 @@
 		</div>
 	</div>
 </div>
+
