@@ -33,9 +33,30 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
+
+// Improved status code handling for more flexibility and maintainability
+app.UseStatusCodePages(context =>
+{
+    var response = context.HttpContext.Response;
+    var statusCode = response.StatusCode;
+
+    // Redirect to custom error pages based on status code
+    switch (statusCode)
+    {
+        case 404:
+            response.Redirect("/Error/PageNotFound");
+            break;
+        default:
+            // Optionally handle other status codes or do nothing
+            break;
+    }
+    return Task.CompletedTask;
+});
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
