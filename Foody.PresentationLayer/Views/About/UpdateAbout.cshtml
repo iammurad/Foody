@@ -1,0 +1,57 @@
+﻿@model Foody.DtoLayer.Dtos.AboutDtos.GetByIdAboutDto
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container">
+	<div class="page-inner">
+		<div class="page-header">
+			<h3 class="fw-bold mb-3">Admin Panel</h3>
+			<ul class="breadcrumbs mb-3">
+				<li class="nav-home">
+					<a href="#">
+						<i class="icon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="icon-arrow-right"></i>
+				</li>
+				<li class="nav-item">
+					<a href="/About/AboutList">About</a>
+				</li>
+				<li class="separator">
+					<i class="icon-arrow-right"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">Update About</a>
+				</li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">About Action Page</div>
+					</div>
+					<div class="card-body">
+						<form method="post">
+							<input type="hidden" asp-for="AboutId" />
+							<label for="Title">Title</label>
+							<input type="text" asp-for="Title" class="form-control" />
+							<label for="ImageUrl">Description</label>
+							<textarea type="text" rows="5" asp-for="Description" class="form-control"> </textarea>
+							<button type="submit" class="btn btn-primary mt-3">Update About</button>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
