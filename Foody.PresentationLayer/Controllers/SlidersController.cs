@@ -45,7 +45,7 @@ namespace Foody.PresentationLayer.Controllers
         public IActionResult UpdateSlider(int id)
         {
             var value = _sliderService.TGetById(id);
-            return View(_mapper.Map<UpdateSliderDto>(value));
+            return View(_mapper.Map<GetByIdSliderDto>(value));
         }
 
         [HttpPost]
