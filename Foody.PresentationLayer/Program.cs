@@ -12,12 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<FoodyContext>();
 
 builder.Services.AddControllersWithViews();
+
+// Registering services and repositories
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
 builder.Services.AddScoped<IProductDal, EfProductDal>();
 builder.Services.AddScoped<IProductService, ProductManager>();
-
 
 builder.Services.AddScoped<ISliderDal, EfSliderDal>();
 builder.Services.AddScoped<ISliderService, SliderManager>();
@@ -27,6 +28,9 @@ builder.Services.AddScoped<IAboutService, AboutManager>();
 
 builder.Services.AddScoped<IAboutItemDal, EfAboutItemDal>();
 builder.Services.AddScoped<IAboutItemService, AboutItemManager>();
+
+builder.Services.AddScoped<IFeatureDal, EfFeatureDal>();
+builder.Services.AddScoped<IFeatureService, FeatureManager>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Register AutoMapper
 

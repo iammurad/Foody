@@ -15,6 +15,12 @@ namespace Foody.DataAccessLayer.EntityFramework
         public EfFeatureDal(FoodyContext context) : base(context)
         {
         }
+
+        public List<Feature> GetAllActiveFeatures()
+        {
+            var context = new FoodyContext();
+            return context.Features.Where(x => x.Status==true).ToList();
+        }
     }
     
 }
