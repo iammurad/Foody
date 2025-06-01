@@ -24,6 +24,11 @@ namespace Foody.BusinessLayer.Concrete
             _categoryDal.Delete(Id);
         }
 
+        public List<Category> TGetActiveCategories()
+        {
+            return _categoryDal.GetActiveCategories();
+        }
+
         public List<Category> TGetAll()
         {
            return _categoryDal.GetAll();
