@@ -8,5 +8,10 @@ namespace Foody.PresentationLayer.Controllers
         {
             return View();
         }
+
+        public IActionResult LoadProductsByCategory(int categoryId)
+        {
+            return ViewComponent("_DefaultProductSectionComponentPartial", new { categoryId=categoryId });
+        }
     }
 }

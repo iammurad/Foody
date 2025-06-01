@@ -11,5 +11,6 @@ namespace Foody.DataAccessLayer.Abstract
     {
         List<Product> GetProductsWithCategory();
         List<Product> GetProductsWithCategoryAndLast12Items();
+        List<Product> GetProductsByCategory(int categoryId);
     }
 }

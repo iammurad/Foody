@@ -11,6 +11,6 @@ namespace Foody.BusinessLayer.Abstract
     {
         List<Product> TGetProductsWithCategory();
         List<Product> TGetProductsWithCategoryAndLast12Items();
-
+        List<Product> TGetProductsByCategory(int categoryId);
     }
 }

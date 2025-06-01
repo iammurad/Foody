@@ -19,6 +19,14 @@ namespace Foody.DataAccessLayer.EntityFramework
             _context = context;
         }
 
+        public List<Product> GetProductsByCategory(int categoryId)
+        {
+            return _context.Products
+                .Include(x => x.Category)
+                .Where(x => x.CategoryId == categoryId)
+                .ToList();
+        }
+
         public List<Product> GetProductsWithCategory()
         {
             var values = _context.Products.Include(x => x.Category).ToList();

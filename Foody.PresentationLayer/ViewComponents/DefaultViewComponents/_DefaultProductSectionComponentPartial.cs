@@ -10,10 +10,14 @@ namespace Foody.PresentationLayer.ViewComponents.DefaultViewComponents
         {
             _productService = productService;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int categoryId = 0)
         {
-            var products = _productService.TGetProductsWithCategoryAndLast12Items();
+            var products = categoryId == 0
+                ? _productService.TGetProductsWithCategoryAndLast12Items()
+                : _productService.TGetProductsByCategory(categoryId);
+
             return View(products);
         }
+
     }
 }
