@@ -14,7 +14,8 @@ namespace Foody.PresentationLayer.ViewComponents.DefaultViewComponents
 
         public IViewComponentResult Invoke()
         {
-            return View();
+            var value = _aboutService.TGetAll();
+            return View(value);
         }
 
     }
