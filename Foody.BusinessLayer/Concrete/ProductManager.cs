@@ -46,5 +46,10 @@ namespace Foody.BusinessLayer.Concrete
         {
             _productDal.Update(entity);
         }
+
+        public List<Product> TGetProductsWithCategoryAndLast12Items()
+        {
+            return _productDal.GetProductsWithCategoryAndLast12Items();
+        }
     }
 }

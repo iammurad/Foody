@@ -7,8 +7,9 @@ using Foody.EntityLayer.Concrete;
 
 namespace Foody.DataAccessLayer.Abstract
 {
-    public interface IProductDal:IGenericDal<Product>
+    public interface IProductDal : IGenericDal<Product>
     {
-         List<Product> GetProductsWithCategory();
+        List<Product> GetProductsWithCategory();
+        List<Product> GetProductsWithCategoryAndLast12Items();
     }
 }

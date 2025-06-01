@@ -14,10 +14,8 @@ namespace Foody.PresentationLayer.ViewComponents.DefaultViewComponents
 
         public IViewComponentResult Invoke()
         {
-
-            return View();
+            var categories = _categoryService.TGetActiveCategories();
+            return View(categories);
         }
-
-
     }
 }
