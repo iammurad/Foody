@@ -36,8 +36,6 @@ else
 }
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<script>
-
 <style>
 	.category-btn.loading {
 		position: relative;
@@ -74,49 +72,65 @@ else
 </style>
 
 <script>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<script>
 	$(document).ready(function () {
 		let isLoading = false;
+		let currentAjax = null;
+		let cache = {}; // Simple memory cache
+		let loadingTimeout;
 
 		$('.category-btn').click(function () {
 			const $this = $(this);
 			const categoryId = $this.data('category-id');
 
+			// 🛡️ Prevent spam or repeat
 			if (isLoading || $this.hasClass('active')) return;
 
 			isLoading = true;
+			$('.category-btn').prop('disabled', true);
+			$('.category-btn').removeClass('active');
+			$this.addClass('active');
 
-			$this.addClass('loading');
-			$('.category-btn').prop('disabled', true); // prevents clicks
+			loadingTimeout = setTimeout(() => $this.addClass('loading'), 200);
 
-			$.ajax({
+			
+			if (cache[categoryId]) {
+				updateProducts(cache[categoryId]);
+				return;
+			}
+
+			
+			if (currentAjax) currentAjax.abort();
+
+			currentAjax = $.ajax({
 				url: '/Default/LoadProductsByCategory',
 				type: 'GET',
 				data: { categoryId },
-				success: function (result) {
-					$('#product-container').fadeOut(100, function () {
-						$(this).html(result).fadeIn(100);
-					});
-
-					$('.category-btn').removeClass('active');
-					$this.addClass('active');
+				success: function (html) {
+					cache[categoryId] = html; 
+					updateProducts(html);
 				},
-				error: function () {
-					alert('Failed to load products. Please try again.');
-				},
-				complete: function () {
-					isLoading = false;
-					$this.removeClass('loading');
-					$('.category-btn').prop('disabled', false);
+				error: function (xhr, status) {
+					if (status !== 'abort') {
+						alert('Failed to load products.');
+						resetUI();
+					}
 				}
 			});
 		});
+
+		function updateProducts(html) {
+			clearTimeout(loadingTimeout);
+			$('#product-container').html(html);
+			resetUI();
+		}
+
+		function resetUI() {
+			isLoading = false;
+			$('.category-btn').removeClass('loading');
+			$('.category-btn').prop('disabled', false);
+			currentAjax = null;
+		}
 	});
 </script>
 
 
-
-
-</script>
