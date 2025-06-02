@@ -18,7 +18,7 @@
 					<i class="icon-arrow-right"></i>
 				</li>
 				<li class="nav-item">
-					<a href="#">Products</a>
+					<a href="/Products/ProductListWithCategories">Products</a>
 				</li>
 				<li class="separator">
 					<i class="icon-arrow-right"></i>
@@ -35,7 +35,7 @@
 						<div class="card-title">Product Action Page</div>
 					</div>
 					<div class="card-body">
-						<form method="post">
+						<form method="post" enctype="multipart/form-data">
 							<label for="ProductName">Product Name</label>
 							<input type="text" asp-for="ProductName" class="form-control" />
 
@@ -46,10 +46,10 @@
 							<input type="text" asp-for="Price" class="form-control" />
 
 
-							<label for="ImageUrl">Image Url	</label>
-							<input type="text" asp-for="ImageUrl" class="form-control" />
+							<label for="ProductImages">Image</label>
+							<input type="file" name="ProductImages" multiple class="form-control" />
 
-							<label for="Description">Image</label>
+							<label for="Description">Description</label>
 							<input type="text" asp-for="Description" class="form-control" />
 
 							<label for="CategoryId">Category</label>

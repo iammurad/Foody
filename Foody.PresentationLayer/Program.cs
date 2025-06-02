@@ -32,6 +32,9 @@ builder.Services.AddScoped<IAboutItemService, AboutItemManager>();
 builder.Services.AddScoped<IFeatureDal, EfFeatureDal>();
 builder.Services.AddScoped<IFeatureService, FeatureManager>();
 
+builder.Services.AddScoped<IProductImageDal, EfProductImageDal>();
+builder.Services.AddScoped<IProductImageService, ProductImageManager>();
+
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly()); // Register AutoMapper
 
 var app = builder.Build();

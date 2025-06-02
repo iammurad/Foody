@@ -9,11 +9,13 @@ namespace Foody.PresentationLayer.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IProductImageService _productImageService;
 
-        public ProductsController(IProductService productService, ICategoryService categoryService)
+        public ProductsController(IProductService productService, ICategoryService categoryService, IProductImageService productImageService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _productImageService = productImageService;
         }
 
         public IActionResult ProductList()
@@ -35,15 +37,55 @@ namespace Foody.PresentationLayer.Controllers
         [HttpGet]
         public IActionResult CreateProduct()
         {
-            ViewBag.Categories = new SelectList(_categoryService.TGetAll(), "CategoryId", "CategoryName"); 
+            ViewBag.Categories = new SelectList(_categoryService.TGetAll(), "CategoryId", "CategoryName");
             return View();
         }
         [HttpPost]
-        public IActionResult CreateProduct(Product product)
+        public async Task<IActionResult> CreateProduct(Product product, List<IFormFile> ProductImages)
         {
-            _productService.TInsert(product);
-            return RedirectToAction("ProductListWithCategories");
+            ModelState.Remove("Category");
+            if (ModelState.IsValid)
+            {
+               
+                _productService.TInsert(product);
+                int productId = product.ProductId; 
+
+                foreach (var file in ProductImages)
+                {
+                    if (file != null && file.Length > 0)
+                    {
+                        // Create a unique filename
+                        var extension = Path.GetExtension(file.FileName);
+                        var uniqueName = Guid.NewGuid().ToString() + extension;
+                        var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/webui/img/", uniqueName);
+
+                        // Ensure the upload folder exists
+                        Directory.CreateDirectory(Path.GetDirectoryName(savePath));
+
+                        // Save the file to disk
+                        using (var stream = new FileStream(savePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        // 3. Create image entry in DB
+                        var productImage = new ProductImage
+                        {
+                            ProductId = productId,
+                            ImageUrl = "wwwroot/webui/img/" + uniqueName
+                        };
+
+                        _productImageService.TInsert(productImage);
+                    }
+                }
+
+                return RedirectToAction("ProductListWithCategories");
+            }
+            ViewBag.Categories = new SelectList(_categoryService.TGetAll(), "CategoryId", "CategoryName");
+            return View(product);
         }
+
+
         public IActionResult DeleteProduct(int id)
         {
             _productService.TDelete(id);
@@ -55,7 +97,7 @@ namespace Foody.PresentationLayer.Controllers
             var product = _productService.TGetById(id);
             return View(product);
         }
-        [HttpPost]  
+        [HttpPost]
         public IActionResult UpdateProduct(Product product)
         {
             _productService.TUpdate(product);
