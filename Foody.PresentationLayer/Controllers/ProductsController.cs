@@ -57,7 +57,7 @@ namespace Foody.PresentationLayer.Controllers
                         // Create a unique filename
                         var extension = Path.GetExtension(file.FileName);
                         var uniqueName = Guid.NewGuid().ToString() + extension;
-                        var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/webui/img/", uniqueName);
+                        var savePath = Path.Combine(Directory.GetCurrentDirectory(), "/webui/img/", uniqueName);
 
                         // Ensure the upload folder exists
                         Directory.CreateDirectory(Path.GetDirectoryName(savePath));
@@ -72,7 +72,7 @@ namespace Foody.PresentationLayer.Controllers
                         var productImage = new ProductImage
                         {
                             ProductId = productId,
-                            ImageUrl = "wwwroot/webui/img/" + uniqueName
+                            ImageUrl = "/webui/img/" + uniqueName
                         };
 
                         _productImageService.TInsert(productImage);

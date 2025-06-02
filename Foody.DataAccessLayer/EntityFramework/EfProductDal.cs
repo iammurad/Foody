@@ -36,6 +36,7 @@ namespace Foody.DataAccessLayer.EntityFramework
         public List<Product> GetProductsWithCategoryAndLast12Items()
         {
           return  _context.Products
+                .Include(x => x.ProductImages)
                 .Include(x => x.Category)
                 .OrderByDescending(x => x.ProductId)
                 .Take(12)

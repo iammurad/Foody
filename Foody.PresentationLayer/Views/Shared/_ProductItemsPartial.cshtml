@@ -7,7 +7,7 @@
 		<div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 			<div class="product-item">
 				<div class="position-relative bg-light overflow-hidden">
-					@* <img class="img-fluid w-100" src="/webui/img/@item.ImageUrl" alt=""> *@
+					<img class="img-fluid w-100" src="@item.ProductImages.FirstOrDefault()?.ImageUrl" alt="">
 					<div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">@item.Category.CategoryName</div>
 				</div>
 				<div class="text-center p-4">
@@ -27,6 +27,9 @@
 		</div>
 
 	}
+	<div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+		<a class="btn btn-primary rounded-pill py-3 px-5" href="">Browse More Products</a>
+	</div>
 }
 else
 {
@@ -34,6 +37,9 @@ else
 		<p>No products found for this category.</p>
 	</div>
 }
+
+
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <style>
