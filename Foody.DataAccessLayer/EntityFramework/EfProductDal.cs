@@ -13,7 +13,7 @@ namespace Foody.DataAccessLayer.EntityFramework
 {
     public class EfProductDal : GenericRepository<Product>, IProductDal
     {
-       private readonly FoodyContext _context;
+        private readonly FoodyContext _context;
         public EfProductDal(FoodyContext context) : base(context)
         {
             _context = context;
@@ -33,15 +33,28 @@ namespace Foody.DataAccessLayer.EntityFramework
             return values;
         }
 
+        public Product GetProductsWithCategoryAndImages(int id)
+        {
+            var product = _context.Products
+            .Include(p => p.ProductImages)
+            .Include(p => p.Category)
+            .FirstOrDefault(p => p.ProductId == id);
+            if (product == null)
+            {
+                throw new KeyNotFoundException($"Product with ID {id} not found.");
+            }
+            return product;
+        }
+
         public List<Product> GetProductsWithCategoryAndLast12Items()
         {
-          return  _context.Products
-                .Include(x => x.ProductImages)
-                .Include(x => x.Category)
-                .OrderByDescending(x => x.ProductId)
-                .Take(12)
-                .ToList();
+            return _context.Products
+                  .Include(x => x.ProductImages)
+                  .Include(x => x.Category)
+                  .OrderByDescending(x => x.ProductId)
+                  .Take(12)
+                  .ToList();
         }
     }
-   
+
 }
