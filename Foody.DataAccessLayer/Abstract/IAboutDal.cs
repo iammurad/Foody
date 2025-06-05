@@ -9,5 +9,6 @@ namespace Foody.DataAccessLayer.Abstract
 {
     public interface IAboutDal : IGenericDal<About>
     {
+
     }
 }

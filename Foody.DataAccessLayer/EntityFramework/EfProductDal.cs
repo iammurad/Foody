@@ -43,7 +43,7 @@ namespace Foody.DataAccessLayer.EntityFramework
             {
                 throw new KeyNotFoundException($"Product with ID {id} not found.");
             }
-            return product;
+            return product; 
         }
 
         public List<Product> GetProductsWithCategoryAndLast12Items()

@@ -14,12 +14,12 @@ namespace Foody.DataAccessLayer.EntityFramework
     {
         public EfCategoryDal(FoodyContext context) : base(context)
         {
-        }
 
+        }
         public List<Category> GetActiveCategories()
         {
             FoodyContext context = new FoodyContext();
-            return context.Categories.Where(x => x.CategoryStatus==true).ToList();
+            return context.Categories.Where(x => x.CategoryStatus == true).ToList();
         }
     }
 }
