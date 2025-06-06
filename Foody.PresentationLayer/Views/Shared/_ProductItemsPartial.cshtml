@@ -64,16 +64,13 @@ else
 		}
 
 	@@keyframes spin {
-		from
+		from {
+			transform: translateY(-50%) rotate(0deg);
+		}
 
-	{
-		transform: translateY(-50%) rotate(0deg);
-	}
-
-	to {
-		transform: translateY(-50%) rotate(360deg);
-	}
-
+		to {
+			transform: translateY(-50%) rotate(360deg);
+		}
 	}
 </style>
 
@@ -98,13 +95,13 @@ else
 
 			loadingTimeout = setTimeout(() => $this.addClass('loading'), 200);
 
-			
+
 			if (cache[categoryId]) {
 				updateProducts(cache[categoryId]);
 				return;
 			}
 
-			
+
 			if (currentAjax) currentAjax.abort();
 
 			currentAjax = $.ajax({
@@ -112,9 +109,10 @@ else
 				type: 'GET',
 				data: { categoryId },
 				success: function (html) {
-					cache[categoryId] = html; 
+					cache[categoryId] = html;
 					updateProducts(html);
 				},
+
 				error: function (xhr, status) {
 					if (status !== 'abort') {
 						alert('Failed to load products.');
@@ -127,6 +125,7 @@ else
 		function updateProducts(html) {
 			clearTimeout(loadingTimeout);
 			$('#product-container').html(html);
+			
 			resetUI();
 		}
 

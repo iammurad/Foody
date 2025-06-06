@@ -23,29 +23,19 @@ namespace Foody.DataAccessLayer.EntityFramework
         {
             return _context.Products
                 .Include(x => x.Category)
+                .Include(x => x.ProductImages)
                 .Where(x => x.CategoryId == categoryId)
                 .ToList();
         }
 
         public List<Product> GetProductsWithCategory()
         {
-            var values = _context.Products.Include(x => x.Category).ToList();
-            return values;
+            return  _context.Products
+                .Include(x => x.ProductImages)
+                .Include(x => x.Category)
+                .ToList();
+           
         }
-
-        public Product GetProductsWithCategoryAndImages(int id)
-        {
-            var product = _context.Products
-            .Include(p => p.ProductImages)
-            .Include(p => p.Category)
-            .FirstOrDefault(p => p.ProductId == id);
-            if (product == null)
-            {
-                throw new KeyNotFoundException($"Product with ID {id} not found.");
-            }
-            return product; 
-        }
-
         public List<Product> GetProductsWithCategoryAndLast12Items()
         {
             return _context.Products
@@ -55,6 +45,22 @@ namespace Foody.DataAccessLayer.EntityFramework
                   .Take(12)
                   .ToList();
         }
+
+        public List<Product> GetProductsWithCategoryAndImages(int id)
+        {
+            var products = _context.Products
+            .Include(p => p.ProductImages)
+            .Include(p => p.Category)
+            .Where(p => p.CategoryId == id).ToList();
+            
+            if (products == null)
+            {
+                throw new KeyNotFoundException($"Product with ID {id} not found.");
+            }
+            return  products; 
+        }
+
+       
     }
 
 }

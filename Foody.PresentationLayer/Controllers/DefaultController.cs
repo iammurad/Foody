@@ -28,7 +28,7 @@ namespace Foody.PresentationLayer.Controllers
                 ? _productService.TGetProductsWithCategoryAndLast12Items()
                 : _productService.TGetProductsByCategory(categoryId);
 
-            return PartialView("_ProductItemsPartial", products); 
+                return PartialView("_ProductItemsPartial", products); 
         }
     }
 }

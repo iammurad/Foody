@@ -56,5 +56,10 @@ namespace Foody.BusinessLayer.Concrete
         {
             return _productDal.GetProductsByCategory(categoryId);
         }
+
+        public List<Product> TGetProductsWithCategoryAndImages(int id)
+        {
+            return _productDal.GetProductsWithCategoryAndImages(id);
+        }
     }
 }
