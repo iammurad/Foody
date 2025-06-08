@@ -34,7 +34,6 @@ namespace Foody.DataAccessLayer.EntityFramework
                 .Include(x => x.ProductImages)
                 .Include(x => x.Category)
                 .ToList();
-           
         }
         public List<Product> GetProductsWithCategoryAndLast12Items()
         {
