@@ -35,7 +35,7 @@
 						<div class="card-title">Product Action Page</div>
 					</div>
 					<div class="card-body">
-						<form method="post">
+						<form method="post" enctype="multipart/form-data">
 							<input type="hidden" asp-for="ProductId" />
 							<label for="ProductName">Product Name</label>
 							<input type="text" asp-for="ProductName" class="form-control" />
@@ -45,13 +45,15 @@
 
 							<label for="Price">Price</label>
 							<input type="text" asp-for="Price" class="form-control" />
+							
+							<label>Replace Main Image</label>
+							<input type="file" name="FirstImage" class="form-control" />
 
+							<label>Add More Images</label>
+							<input type="file" name="ProductImages" multiple class="form-control" />
 
-@* 							<label for="ImageUrl">Image Url	</label>
-							<input type="text" asp-for="ImageUrl" class="form-control" /> *@
-
-							<label for="Description">Image</label>
-							<input type="text" asp-for="Description" class="form-control" />
+							<label for="Description">Description</label>
+							<textarea class="form-control" rows="4" asp-for="Description"></textarea>
 
 							<label for="CategoryId">Category</label>
 							<select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>

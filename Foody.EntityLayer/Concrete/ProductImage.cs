@@ -8,6 +8,7 @@ namespace Foody.EntityLayer.Concrete
         [Key]
         public int ImageId { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsMain { get; set; } // NEW: for "first"/main image
 
         // Foreign key
         public int ProductId { get; set; }

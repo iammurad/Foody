@@ -23,7 +23,7 @@ namespace Foody.DataAccessLayer.EntityFramework
         {
             return _context.Products
                 .Include(x => x.Category)
-                .Include(x => x.ProductImages)
+                .Include(x => x.ProductImages.Where(x=>x.IsMain))
                 .Where(x => x.CategoryId == categoryId)
                 .ToList();
         }
@@ -31,14 +31,14 @@ namespace Foody.DataAccessLayer.EntityFramework
         public List<Product> GetProductsWithCategory()
         {
             return  _context.Products
-                .Include(x => x.ProductImages)
+                .Include(x => x.ProductImages.Where(x=>x.IsMain))
                 .Include(x => x.Category)
                 .ToList();
         }
         public List<Product> GetProductsWithCategoryAndLast12Items()
         {
             return _context.Products
-                  .Include(x => x.ProductImages)
+                  .Include(x => x.ProductImages.Where(x=>x.IsMain))
                   .Include(x => x.Category)
                   .OrderByDescending(x => x.ProductId)
                   .Take(12)
@@ -48,7 +48,7 @@ namespace Foody.DataAccessLayer.EntityFramework
         public List<Product> GetProductsWithCategoryAndImages(int id)
         {
             var products = _context.Products
-            .Include(p => p.ProductImages)
+            .Include(p => p.ProductImages.Where(x=>x.IsMain))
             .Include(p => p.Category)
             .Where(p => p.CategoryId == id).ToList();
             

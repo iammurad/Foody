@@ -1,4 +1,5 @@
-﻿using Foody.BusinessLayer.Abstract;
+﻿using System.Diagnostics.CodeAnalysis;
+using Foody.BusinessLayer.Abstract;
 using Foody.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -46,51 +47,22 @@ namespace Foody.PresentationLayer.Controllers
             ModelState.Remove("Category");
             if (ModelState.IsValid)
             {
-               
                 _productService.TInsert(product);
-                int productId = product.ProductId; 
-
-                foreach (var file in ProductImages)
+                if (ProductImages != null && ProductImages.Any(f => f != null && f.Length > 0))
                 {
-                    if (file != null && file.Length > 0)
-                    {
-                        // Create a unique filename
-                        var extension = Path.GetExtension(file.FileName);
-                        var uniqueName = Guid.NewGuid().ToString() + extension;
-                        var savePath = Path.Combine(Directory.GetCurrentDirectory(), "/webui/img/", uniqueName);
-
-                        // Ensure the upload folder exists
-                        Directory.CreateDirectory(Path.GetDirectoryName(savePath));
-
-                        // Save the file to disk
-                        using (var stream = new FileStream(savePath, FileMode.Create))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
-
-                        // 3. Create image entry in DB
-                        var productImage = new ProductImage
-                        {
-                            ProductId = productId,
-                            ImageUrl = "/webui/img/" + uniqueName
-                        };
-
-                        _productImageService.TInsert(productImage);
-                    }
+                    await SaveProductImagesAsync(product.ProductId, ProductImages);
                 }
-
                 return RedirectToAction("ProductListWithCategories");
             }
             ViewBag.Categories = new SelectList(_categoryService.TGetAll(), "CategoryId", "CategoryName");
             return View(product);
         }
-
-
         public IActionResult DeleteProduct(int id)
         {
             _productService.TDelete(id);
             return RedirectToAction("ProductListWithCategories");
         }
+        [SuppressMessage("ReSharper.DPA", "DPA0011: High execution time of MVC action", MessageId = "time: 4053ms")]
         public IActionResult UpdateProduct(int id)
         {
             ViewBag.Categories = new SelectList(_categoryService.TGetAll(), "CategoryId", "CategoryName");
@@ -98,11 +70,51 @@ namespace Foody.PresentationLayer.Controllers
             return View(product);
         }
         [HttpPost]
-        public IActionResult UpdateProduct(Product product)
+        public async Task<IActionResult> UpdateProduct(Product product, List<IFormFile> ProductImages)
         {
-            _productService.TUpdate(product);
-            return RedirectToAction("ProductListWithCategories");
+            ModelState.Remove("Category");
+            if (ModelState.IsValid)
+            {
+                _productService.TUpdate(product);
+                if (ProductImages != null && ProductImages.Any(f => f != null && f.Length > 0))
+                {
+                    await SaveProductImagesAsync(product.ProductId, ProductImages);
+                }
+
+                return RedirectToAction("ProductListWithCategories");
+            }
+            ViewBag.Categories = new SelectList(_categoryService.TGetAll(), "CategoryId", "CategoryName");
+            return View(product);
         }
+        private async Task SaveProductImagesAsync(int productId, List<IFormFile> files)
+        {
+            foreach (var file in files)
+            {
+                if (file != null && file.Length > 0)
+                {
+                    var extension = Path.GetExtension(file.FileName);
+                    var uniqueName = Guid.NewGuid().ToString() + extension;
+                    var relativePath = "/webui/img/" + uniqueName;
+                    var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "webui", "img", uniqueName);
+
+                    Directory.CreateDirectory(Path.GetDirectoryName(savePath));
+
+                    using (var stream = new FileStream(savePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    var productImage = new ProductImage
+                    {
+                        ProductId = productId,
+                        ImageUrl = relativePath
+                    };
+
+                    _productImageService.TInsert(productImage);
+                }
+            }
+        }
+
 
     }
 }
