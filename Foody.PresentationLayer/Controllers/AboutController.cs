@@ -12,7 +12,7 @@ namespace Foody.PresentationLayer.Controllers
         private readonly IMapper _mapper;
         private readonly IAboutService _aboutService;
 
-        public AboutController(IAboutService _aboutService, IMapper _mapper)
+        public AboutController(IAboutService  _aboutService, IMapper _mapper)
         {
             this._aboutService = _aboutService;
             this._mapper = _mapper;
